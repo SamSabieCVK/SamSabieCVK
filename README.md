@@ -7,7 +7,6 @@ Sam sabie CVK (translated as DIY election board) provides protocol and infrastru
 Here is presented a script how shall a voter to behave using Sam sabie CVK.
 
 ![Overview diagram](./doc/image/overview.svg)
-<img src="./doc/image/overview.svg">
 
 1) Make a choice of your candidate/party, mark appropriately.
 2) Place your passport below a row with your choice; make a photo of your pass last page together with the ballot.
