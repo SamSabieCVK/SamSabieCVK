@@ -85,9 +85,9 @@ int main(int argc, char *argv[])
     printf("\n");
     clock_t tic6 = clock();
     int cmp_ab, cmp_ac, cmp_bc;
-    if(0 > (cmp_ab = is_equal_legal_identity(Pa, Qa, Pb, Qb, k2, modulo, ctx))) goto err;
-    if(0 > (cmp_ac = is_equal_legal_identity(Pa, Qa, Pc, Qc, k2, modulo, ctx))) goto err;//);
-    if(0 > (cmp_bc = is_equal_legal_identity(Pb, Qb, Pc, Qc, k2, modulo, ctx))) goto err;
+    if(0 > (cmp_ab = is_equal_legal_identity(Pa, Qa, Pb, Qb, modulo, k2, ctx))) goto err;
+    if(0 > (cmp_ac = is_equal_legal_identity(Pa, Qa, Pc, Qc, modulo, k2, ctx))) goto err;//);
+    if(0 > (cmp_bc = is_equal_legal_identity(Pb, Qb, Pc, Qc, modulo, k2, ctx))) goto err;
     clock_t tic7 = clock();
     printf("ab %d\n", cmp_ab);
     printf("ac %d\n", cmp_ac);
