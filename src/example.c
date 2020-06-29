@@ -67,11 +67,11 @@ int main(int argc, char *argv[])
 
     clock_t tic4 = clock();
     if(!BN_set_word(xa, 1732567)) goto err;
-    if(!make_voter_signature(Pa, Qa, xa, modulo, h, g1, g2, k2, ctx)) goto err;
+    if(!make_voter_signature(Pa, Qa, xa, modulo, h, g1, g2, ctx)) goto err;
     if(!BN_set_word(xb, 1732566)) goto err;
-    if(!make_voter_signature(Pb, Qb, xb, modulo, h, g1, g2, k2, ctx)) goto err;
+    if(!make_voter_signature(Pb, Qb, xb, modulo, h, g1, g2, ctx)) goto err;
     if(!BN_set_word(xc, 1732567)) goto err;
-    if(!make_voter_signature(Pc, Qc, xc, modulo, h, g1, g2, k2, ctx)) goto err;
+    if(!make_voter_signature(Pc, Qc, xc, modulo, h, g1, g2, ctx)) goto err;
     clock_t tic5 = clock();
 
     printf("Pa: %s\n", BN_bn2hex(Pa));

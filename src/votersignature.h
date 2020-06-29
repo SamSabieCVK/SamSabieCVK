@@ -27,7 +27,7 @@ int prepare_public_keys(int bits_prime,
 int make_voter_signature(BIGNUM *P, BIGNUM *Q,
     const BIGNUM *legal_identity,
     const BIGNUM *modulo, const BIGNUM *h,
-    const BIGNUM *g1, const BIGNUM *g2, const BIGNUM *k2,
+    const BIGNUM *g1, const BIGNUM *g2,
     BN_CTX *ctx);
 
 int is_equal_legal_identity(const BIGNUM *Pa, const BIGNUM *Qa,

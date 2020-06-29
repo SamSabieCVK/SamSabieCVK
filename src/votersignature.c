@@ -103,7 +103,7 @@ err:
 int make_voter_signature(BIGNUM *P, BIGNUM *Q,
     const BIGNUM *legal_identity,
     const BIGNUM *modulo, const BIGNUM *h,
-    const BIGNUM *g1, const BIGNUM *g2, const BIGNUM *k2,
+    const BIGNUM *g1, const BIGNUM *g2,
     BN_CTX *ctx)
 {
     BIGNUM *upper_bound, *r, *t;
