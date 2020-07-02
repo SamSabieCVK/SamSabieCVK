@@ -157,3 +157,26 @@ err:
     BN_CTX_end(ctx);
     return result;
 }
+
+int transform_signature(BIGNUM *transformed,
+    const BIGNUM *P, const BIGNUM *Q,
+    const BIGNUM *modulo, const BIGNUM *k2,
+    BN_CTX *ctx)
+{
+    BIGNUM *tp, *tq;
+    int result = 0;
+
+    BN_CTX_start(ctx);
+    tp = BN_CTX_get(ctx);
+    tq = BN_CTX_get(ctx);
+    if (NULL == tq) goto err;
+
+    if(!BN_mod_inverse(tp, P, modulo, ctx)) goto err;
+    if(!BN_mod_exp(tq, Q, k2, modulo, ctx)) goto err;
+    if(!BN_mod_mul(transformed, tp, tq, modulo, ctx)) goto err;
+
+    result = 1;
+err:
+    BN_CTX_end(ctx);
+    return result;
+}

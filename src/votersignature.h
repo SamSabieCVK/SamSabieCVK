@@ -30,7 +30,7 @@ limitations under the License.
  * @param h [out] some root of unity in the ring
  * @param g1 [out] public key to generate voter's signature
  * @param g2 [out] public key to generate voter's signature
- * @param k2 [out] public key to compare legal identity
+ * @param k2 [out] secret key to compare legal identity
  * @param ctx context to allocate intermediate results
  *
  * @return 1 on success, 0 on failure
@@ -72,7 +72,7 @@ int make_voter_signature(BIGNUM *P, BIGNUM *Q,
  * @param Pb the first part of Bob's signature
  * @param Qb the second part of Bob's signature
  * @param modulo prime number defining ring
- * @param k2 public key to make comparison
+ * @param k2 secret key to make comparison
  * @param ctx context to allocate intermediate results
  *
  * @return 1 if equal, 0 if not equal, -1 on failure
@@ -82,5 +82,45 @@ int is_equal_legal_identity(const BIGNUM *Pa, const BIGNUM *Qa,
     const BIGNUM *Pb, const BIGNUM *Qb,
     const BIGNUM *modulo, const BIGNUM *k2,
     BN_CTX *ctx);
+
+/**
+ * @brief Transform voter's signature with secret key to fast search
+ *
+ * The transformation with the secret key on election board side allows
+ * fast search for the same legal identity between other ballots. EB
+ * cannot decrypt from P and Q the legal identity, because it doesn't
+ * know secret voter's key. And third party cannot guess from P and Q
+ * neither the legal identity nor transformed identity used by EB,
+ * because it doesn't know secret voter's and EB's keys.
+ *
+ * @param [out] transformed resulting identity used for fast look up
+ * @param P the first part of signature
+ * @param Q the second part of signature
+ * @param modulo prime number defining ring
+ * @param k2 secret key to make transformation
+ * @param ctx context to allocate intermediate results
+ *
+ * @return 1 on success, 0 on failure
+ */
+
+int transform_signature(BIGNUM *transformed,
+    const BIGNUM *P, const BIGNUM *Q,
+    const BIGNUM *modulo, const BIGNUM *k2,
+    BN_CTX *ctx);
+
+/**
+ * @brief Structure to hold voter's signature and mapped identity
+ *
+ * Mapped identity is obtained on EB side with the dedicated secret key
+ * and has 1:1 correspondence with the legal identity, but the last cannot
+ * be decrypted on EB.
+ */
+
+typedef struct Signatures
+{
+    BIGNUM* P; /**< the first part of the voter's signature */
+    BIGNUM* Q; /**< the second part of the voter's signature */
+    BIGNUM* mlid; /**< the mapped legal identity obtained with secret key */
+} Signatures;
 
 #endif
